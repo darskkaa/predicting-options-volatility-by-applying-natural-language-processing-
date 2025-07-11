@@ -1,0 +1,119 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 0, 0, 0;
+  --background-end-rgb: 0, 0, 0;
+  --accent-color: 59, 130, 246;
+  --card-bg: 17, 24, 39;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 18px; /* Increased base font size for better readability */
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+    to bottom,
+    rgb(var(--background-start-rgb)),
+    rgb(var(--background-end-rgb))
+  );
+  min-height: 100vh;
+  font-size: 18px; /* Increased body text size */
+  line-height: 1.6;
+}
+
+/* Ensure all text elements have minimum readable sizes */
+h1, h2, h3, h4, h5, h6 {
+  font-size: inherit;
+  line-height: 1.2;
+}
+
+p, span, div {
+  font-size: inherit;
+}
+
+/* Force much larger text sizes for better readability */
+.text-xs { font-size: 1rem !important; } /* 18px */
+.text-sm { font-size: 1.125rem !important; } /* 20px */
+.text-base { font-size: 1.25rem !important; } /* 22px */
+.text-lg { font-size: 1.5rem !important; } /* 27px */
+.text-xl { font-size: 1.875rem !important; } /* 34px */
+.text-2xl { font-size: 2.25rem !important; } /* 40px */
+.text-3xl { font-size: 3rem !important; } /* 54px */
+.text-4xl { font-size: 3.75rem !important; } /* 67px */
+.text-5xl { font-size: 4.5rem !important; } /* 81px */
+.text-6xl { font-size: 5.25rem !important; } /* 94px */
+.text-7xl { font-size: 6rem !important; } /* 108px */
+.text-8xl { font-size: 7rem !important; } /* 126px */
+
+.glassmorphism {
+  background: rgba(17, 24, 39, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1rem;
+}
+
+.card-hover {
+  transition: all 0.3s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.gradient-text {
+  background: linear-gradient(45deg, #3b82f6, #60a5fa);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.chart-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem;
+  background: rgba(17, 24, 39, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1.5rem;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.pulse {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(59, 130, 246, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0);
+  }
+}
