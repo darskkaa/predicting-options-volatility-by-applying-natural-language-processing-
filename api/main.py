@@ -343,7 +343,7 @@ def calculate_volatility(ticker: str) -> Dict[str, Any]:
                 "annualized_volatility": 0,
                 "volatility_rating": "Unknown",
                 "daily_volatility": 0
-            }
+        }
     except Exception as e:
         print(f"Error calculating volatility for {ticker}: {e}")
         return {

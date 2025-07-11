@@ -3,7 +3,11 @@
   "builds": [
     {
       "src": "api/main.py",
-      "use": "@vercel/python"
+      "use": "@vercel/python",
+      "config": {
+        "maxLambdaSize": "15mb",
+        "runtime": "python3.11"
+      }
     },
     {
       "src": "app/package.json",
@@ -20,7 +24,12 @@
       "dest": "/app/$1"
     }
   ],
+  "functions": {
+    "api/main.py": {
+      "maxDuration": 30
+    }
+  },
   "env": {
-    "PYTHON_VERSION": "3.11"
+    "PYTHONPATH": "api"
   }
 } 
