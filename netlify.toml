@@ -1,11 +1,12 @@
 [build]
   base = "."
-  command = "pip install -r api/requirements.txt && cd app && npm install && npm run build"
+  command = "python -m pip install --upgrade pip && pip install -r api/requirements.txt && cd app && npm install && npm run build"
   publish = "app/out"
 
 [build.environment]
   NODE_VERSION = "18"
   PYTHON_VERSION = "3.11"
+  PYTHON_RUNTIME = "3.11"
 
 [[redirects]]
   from = "/api/*"
