@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 """
 VOLA Engine Startup Script
-Starts both the FastAPI backend and provides instructions for the frontend
+Starts both the FastAPI backend and provides instructions for the frontend, patchged dir
+
+
 """
 
 import subprocess
