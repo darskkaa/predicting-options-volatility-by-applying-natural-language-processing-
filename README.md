@@ -1,109 +1,93 @@
 # VOLA Engine
 
-A quantitative volatility analysis platform implementing advanced stochastic modeling and statistical arbitrage methodologies. Developed by Adil.
+Advanced volatility analysis platform for quantitative research and financial analytics.
 
-## Mathematical Framework
+## Features
 
-### Volatility Surface Reconstruction
-- **Local Volatility Model**: Implements Dupire's forward equation for local volatility surface estimation
-- **Stochastic Volatility**: Heston model calibration with mean-reverting Ornstein-Uhlenbeck processes
-- **Implied Volatility Interpolation**: Cubic spline interpolation with boundary condition enforcement
-- **Volatility-of-Volatility**: Estimation of second-order volatility dynamics
+- Real-time stock data integration (Polygon.io, FMP, yfinance)
+- Comprehensive volatility metrics and analysis
+- Earnings data and market sentiment indicators
+- Professional-grade API with detailed error handling
+- Modern React frontend with real-time updates
 
-### Statistical Arbitrage Implementation
-- **Cointegration Analysis**: Engle-Granger and Johansen tests for mean-reverting pairs
-- **Kalman Filter**: Real-time state estimation for dynamic volatility modeling
-- **GARCH(1,1)**: Generalized Autoregressive Conditional Heteroskedasticity modeling
-- **EWMA**: Exponentially Weighted Moving Average for volatility forecasting
+## Quick Start
 
-## Quantitative Methodologies
-
-### Risk Metrics
-- **Value-at-Risk (VaR)**: Monte Carlo simulation with 95% and 99% confidence intervals
-- **Expected Shortfall**: Conditional VaR calculation for tail risk assessment
-- **Sharpe Ratio**: Risk-adjusted return optimization
-- **Maximum Drawdown**: Historical peak-to-trough analysis
-
-### Time Series Analysis
-- **ARIMA Modeling**: Autoregressive Integrated Moving Average for trend decomposition
-- **Unit Root Tests**: Augmented Dickey-Fuller and Phillips-Perron tests
-- **Granger Causality**: Lead-lag relationship analysis between volatility factors
-- **Regime Switching**: Markov-switching models for volatility regime identification
-
-## Technical Architecture
-
-### Backend Implementation
-```python
-# FastAPI with async/await patterns
-# Real-time data streaming with WebSocket support
-# Redis caching for low-latency volatility calculations
-# PostgreSQL for historical data persistence
-```
-
-### Frontend Analytics
-```typescript
-// React with TypeScript for type-safe development
-// D3.js for interactive volatility surface visualization
-// WebGL for high-performance chart rendering
-// Real-time data updates via Server-Sent Events
-```
-
-## Data Pipeline Architecture
-
-### Multi-Source Integration
-- **Polygon.io**: Real-time market data with nanosecond precision
-- **Financial Modeling Prep**: Fundamental analysis with earnings surprise modeling
-- **yfinance**: Fallback data source with comprehensive coverage
-- **Data Quality**: Automated outlier detection and missing data imputation
-
-### Feature Engineering
-- **Technical Indicators**: RSI, MACD, Bollinger Bands with adaptive parameters
-- **Volatility Measures**: Realized volatility, Parkinson volatility, Garman-Klass estimator
-- **Liquidity Metrics**: Bid-ask spread analysis, volume-weighted average price (VWAP)
-- **Market Microstructure**: Order flow analysis, market impact modeling
-
-## Deployment Configuration
-
-### Production Environment
+### Backend Setup
 ```bash
-# Backend: FastAPI with uvicorn
 cd api
+pip install -r requirements.txt
 uvicorn main:app --reload --host 127.0.0.1 --port 8000
+```
 
-# Frontend: Next.js with TypeScript
+### Frontend Setup
+```bash
 cd app
+npm install
 npm run dev
 ```
 
-### Vercel Deployment Strategy
-1. **Serverless Functions**: API routes with cold start optimization
-2. **Environment Variables**: Secure API key management
-   - `POLYGON_API_KEY`: Real-time market data access
-   - `FMP_API_KEY`: Fundamental analysis data
-3. **Performance Optimization**: Edge caching and CDN distribution
-4. **Monitoring**: Real-time performance metrics and error tracking
+## API Documentation
 
-## Performance Specifications
+### Core Endpoints
 
-- **Latency**: Sub-100ms response times for real-time volatility calculations
-- **Throughput**: 1000+ concurrent requests with horizontal scaling
-- **Accuracy**: 95%+ precision in volatility forecasting models
-- **Uptime**: 99.9% availability with automatic failover
+#### `GET /analyze/{ticker}`
+Comprehensive stock analysis with volatility metrics.
 
-## Quantitative Validation
+**Response:**
+```json
+{
+  "success": true,
+  "ticker": "AAPL",
+  "current_price": 150.25,
+  "price_change": 2.50,
+  "price_change_percent": 1.67,
+  "volatility_30d": 18.5,
+  "volatility_rating": "Moderate",
+  "market_cap": 2500000000000,
+  "volume": 45000000,
+  "next_earnings": "2024-01-25",
+  "analysis_summary": "AAPL is currently trading at $150.25 with a moderate volatility of 18.5%..."
+}
+```
 
-### Model Performance Metrics
-- **Mean Absolute Error (MAE)**: < 2% for volatility predictions
-- **Root Mean Square Error (RMSE)**: < 3% for statistical arbitrage signals
-- **R-squared**: > 0.85 for regression models
-- **Backtesting**: Walk-forward analysis with out-of-sample validation
+#### `GET /health`
+API health check endpoint.
 
-### Risk Management
-- **Position Sizing**: Kelly Criterion implementation for optimal leverage
-- **Stop-Loss**: Dynamic stop-loss based on volatility-adjusted position limits
-- **Portfolio Optimization**: Markowitz mean-variance optimization with constraints
-- **Stress Testing**: Monte Carlo simulation under extreme market conditions
+**Response:**
+```json
+{
+  "status": "healthy",
+  "timestamp": "2024-01-15T10:30:00Z"
+}
+```
 
-## Developed by Adil
+### Error Handling
 
-This platform implements cutting-edge quantitative finance methodologies, combining advanced stochastic modeling with real-time market microstructure analysis for sophisticated volatility forecasting and statistical arbitrage signal generation. 
+The API provides detailed error responses with specific error codes and messages:
+
+```json
+{
+  "success": false,
+  "ticker": "INVALID",
+  "error": "Data unavailable: No real data found for INVALID",
+  "current_price": 0,
+  "volatility_rating": "Error"
+}
+```
+
+## Environment Variables
+
+Create a `.env` file in the `api` directory:
+
+```env
+POLYGON_API_KEY=your_polygon_api_key
+FMP_API_KEY=your_fmp_api_key
+```
+
+## Deployment
+
+The application is configured for Vercel deployment with automatic API routing and environment variable management.
+
+## Contributing
+
+This project follows professional development practices with comprehensive error handling, detailed documentation, and clean code architecture. 

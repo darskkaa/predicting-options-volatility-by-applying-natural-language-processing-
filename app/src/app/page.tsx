@@ -40,6 +40,7 @@ const formatLargeNumber = (num: number): string => {
   return num.toString();
 };
 
+// Main dashboard page for VOLA Engine: provides stock search, analysis, and visualization UI
 export default function Home() {
   const [stockData, setStockData] = useState<StockData | null>(null);
   const [sentimentData, setSentimentData] = useState<SentimentData | null>(null);
@@ -57,7 +58,8 @@ export default function Home() {
     try {
       const response = await fetch(`/api/analyze/${stockSymbol.toUpperCase()}`);
       if (!response.ok) {
-        throw new Error(`Failed to fetch data: ${response.status}`);
+        const errorText = await response.text();
+        throw new Error(`API request failed (${response.status}): ${errorText}`);
       }
       const data = await response.json();
       
@@ -81,7 +83,8 @@ export default function Home() {
       }
     } catch (error) {
       console.error('Error fetching stock data:', error);
-      setError(error instanceof Error ? error.message : 'Failed to fetch data');
+      const errorMessage = error instanceof Error ? error.message : 'Failed to fetch data';
+      setError(errorMessage);
       setStockData(null);
     } finally {
       setLoading(false);

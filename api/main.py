@@ -1,3 +1,8 @@
+"""
+VOLA Engine API
+
+This FastAPI application provides endpoints for real-time stock volatility analysis, integrating with Polygon.io, FMP, and yfinance APIs. It exposes endpoints for comprehensive stock data, volatility metrics, and earnings information, designed for quant research and financial analytics workflows.
+"""
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 import os
@@ -63,7 +68,7 @@ def generate_analysis_summary(ticker: str, stock_data: dict, volatility_data: di
 
 @app.get("/analyze/{ticker}")
 async def analyze_stock(ticker: str):
-    """Analyze any stock ticker with comprehensive data"""
+    """Analyze any stock ticker with comprehensive data and improved error handling"""
     ticker = ticker.upper()
     
     try:
@@ -105,12 +110,12 @@ async def analyze_stock(ticker: str):
         
         return formatted_response
         
-    except Exception as e:
-        print(f"Error analyzing {ticker}: {e}")
+    except HTTPException as e:
+        print(f"HTTP error analyzing {ticker}: {e.detail}")
         return {
             "success": False,
             "ticker": ticker,
-            "error": str(e),
+            "error": f"Data unavailable: {e.detail}",
             "current_price": 0,
             "price_change": 0,
             "price_change_percent": 0,
@@ -126,7 +131,30 @@ async def analyze_stock(ticker: str):
             "earnings_date": "N/A",
             "data_source": "Error",
             "timestamp": datetime.now().isoformat(),
-            "analysis_summary": "No analysis available due to error."
+            "analysis_summary": "No analysis available due to data error."
+        }
+    except Exception as e:
+        print(f"Unexpected error analyzing {ticker}: {e}")
+        return {
+            "success": False,
+            "ticker": ticker,
+            "error": f"Analysis failed: {str(e)}",
+            "current_price": 0,
+            "price_change": 0,
+            "price_change_percent": 0,
+            "market_cap": 0,
+            "volume": 0,
+            "avg_volume": 0,
+            "high": 0,
+            "low": 0,
+            "open": 0,
+            "volatility_30d": 0,
+            "volatility_rating": "Error",
+            "next_earnings": "N/A",
+            "earnings_date": "N/A",
+            "data_source": "Error",
+            "timestamp": datetime.now().isoformat(),
+            "analysis_summary": "No analysis available due to unexpected error."
         }
 
 def get_comprehensive_stock_data(ticker: str) -> dict:
