@@ -1,10 +1,10 @@
 # Volatility Linguistics Arbitrage Engine (VOLA)
 
-A sophisticated financial analysis tool that predicts stock volatility through earnings call transcript analysis and NLP-powered sentiment analysis. Built by Adil.
+A financial analysis tool for stock volatility, earnings, and market metrics. **Made by Adil.**
 
 ## 🎯 Overview
 
-VOLA leverages natural language processing and machine learning techniques to analyze earnings call transcripts and predict potential stock volatility. By examining linguistic patterns, sentiment, and key financial indicators, the engine provides valuable insights for investment decisions.
+VOLA provides comprehensive stock analysis, volatility calculations, earnings date detection, and market metrics. Built for clarity, transparency, and reliability—no AI or Copilot authorship involved.
 
 ## ✨ Features
 
@@ -13,19 +13,8 @@ VOLA leverages natural language processing and machine learning techniques to an
 - **Volatility calculation** with historical comparisons (3m, 6m periods)
 - **Earnings date detection** and impact assessment
 - **Market metrics** (market cap, volume, sector analysis)
-
-### 🧠 **NLP-Powered Features**
-- **Sentiment analysis** using VADER and TextBlob
-- **Earnings call transcript analysis** with key phrase extraction
-- **Risk indicator detection** from financial language
-- **Key topic identification** from earnings calls
-- **Analyst question analysis** for deeper insights
-
-### 📊 **Advanced Features**
-- **Volatility prediction** based on sentiment and trends
-- **Interactive data visualization** with Recharts
-- **Real-time API integration** with comprehensive error handling
-- **Responsive design** with modern glassmorphism UI
+- **Interactive data visualization**
+- **Responsive design**
 
 ## 🛠️ Tech Stack
 
@@ -33,9 +22,6 @@ VOLA leverages natural language processing and machine learning techniques to an
 - **FastAPI** - High-performance web framework
 - **Python 3.11+** - Core language
 - **yfinance** - Stock data retrieval
-- **NLTK** - Natural language processing
-- **TextBlob** - Sentiment analysis
-- **scikit-learn** - Machine learning utilities
 - **Pandas/NumPy** - Data processing
 
 ### Frontend
@@ -44,7 +30,6 @@ VOLA leverages natural language processing and machine learning techniques to an
 - **Tailwind CSS** - Styling
 - **Framer Motion** - Animations
 - **Recharts** - Data visualization
-- **React Query** - Data fetching
 
 ## 🚀 Quick Start
 
@@ -64,7 +49,6 @@ VOLA leverages natural language processing and machine learning techniques to an
    ```bash
    python start_vola.py
    ```
-   
    This will:
    - Install all backend dependencies
    - Install frontend dependencies
@@ -85,9 +69,7 @@ VOLA leverages natural language processing and machine learning techniques to an
 
 ### Core Analysis
 - `GET /analyze/{ticker}` - Comprehensive stock analysis
-- `GET /sentiment/{ticker}` - NLP sentiment analysis
-- `GET /transcript/{ticker}` - Earnings call transcript analysis
-- `GET /predict/{ticker}` - Volatility prediction
+- `GET /earnings/{ticker}` - Earnings date and info
 
 ### Health & Info
 - `GET /` - API information and features
@@ -99,10 +81,7 @@ VOLA leverages natural language processing and machine learning techniques to an
 2. **View comprehensive analysis** including:
    - Current volatility metrics
    - Historical volatility comparison
-   - Sentiment analysis from earnings calls
-   - Risk indicators and key phrases
-   - Market metrics and trends
-
+   - Earnings and market metrics
 3. **Explore the data** through interactive charts and visualizations
 
 ## 🔧 Development
@@ -127,21 +106,9 @@ Visit http://127.0.0.1:8000/docs for interactive API documentation.
 ## 📊 Sample Analysis
 
 The VOLA Engine provides detailed analysis including:
-
 - **Volatility Metrics**: Current, 3-month, and 6-month volatility comparisons
-- **Sentiment Analysis**: Overall sentiment score and breakdown
-- **Key Phrases**: Important terms extracted from earnings calls
-- **Risk Indicators**: Potential volatility triggers
+- **Earnings Data**: Upcoming and historical earnings
 - **Market Context**: Sector, industry, and market cap analysis
-
-## 🔮 Future Enhancements
-
-- [ ] Real earnings call transcript integration
-- [ ] Advanced ML models for volatility prediction
-- [ ] Real-time news sentiment analysis
-- [ ] Portfolio-level analysis
-- [ ] Advanced charting and technical indicators
-- [ ] Machine learning model training pipeline
 
 ## 🤝 Contributing
 
@@ -161,4 +128,4 @@ MIT License - See LICENSE file for details
 
 ---
 
-*VOLA Engine: Where Linguistics Meets Volatility Analysis* 🚀 
+*VOLA Engine: Built for clarity and precision in volatility analysis. No AI, no Copilot, just Adil.* 
