@@ -24,6 +24,16 @@
       "dest": "/app/$1"
     }
   ],
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/api/main.py"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/app/$1"
+    }
+  ],
   "functions": {
     "api/main.py": {
       "maxDuration": 30
