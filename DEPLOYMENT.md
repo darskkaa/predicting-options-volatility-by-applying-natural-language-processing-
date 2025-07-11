@@ -1,10 +1,10 @@
-# VOLA Engine - Netlify Deployment Guide
+# VOLA Engine - Vercel Deployment Guide
 
-This guide covers deploying the VOLA Engine to Netlify, a financial analysis tool with FastAPI backend and Next.js frontend.
+This guide covers deploying the VOLA Engine to Vercel, a financial analysis tool with FastAPI backend and Next.js frontend.
 
 ## Deployment Overview
 
-Deploy your entire VOLA Engine application (frontend + backend) to Netlify in one deployment.
+Deploy your entire VOLA Engine application (frontend + backend) to Vercel in one deployment.
 
 ## Prerequisites
 
@@ -14,159 +14,86 @@ Deploy your entire VOLA Engine application (frontend + backend) to Netlify in on
 
 2. **GitHub Account**: For version control and deployment
 
-3. **Netlify Account**: Sign up at [netlify.com](https://netlify.com)
+3. **Vercel Account**: Sign up at [vercel.com](https://vercel.com)
 
-## Netlify Deployment
+## Vercel Deployment
 
 ### Step 1: Prepare Repository
 ```bash
 # Ensure your code is pushed to GitHub
 git add .
-git commit -m "Prepare for Netlify deployment"
+git commit -m "Prepare for Vercel deployment"
 git push origin main
 ```
 
-### Step 2: Deploy to Netlify
-1. Go to [netlify.com](https://netlify.com)
-2. Sign up/Login with GitHub
-3. Click "New site from Git"
-4. Select your GitHub repository
-5. Configure build settings:
-   - **Base directory**: Leave empty (root)
-   - **Build command**: `pip install -r api/requirements.txt && cd app && npm install && npm run build`
-   - **Publish directory**: `app/out`
-6. Click "Deploy site"
+### Step 2: Deploy to Vercel
 
-### Step 3: Configure Environment Variables
-In your Netlify site dashboard:
-1. Go to Site settings → Environment variables
-2. Add the following variables:
-   ```
-   POLYGON_API_KEY=your_polygon_key_here
-   FMP_API_KEY=your_fmp_key_here
-   ```
+1. **Go to Vercel Dashboard**: Visit [vercel.com/dashboard](https://vercel.com/dashboard)
 
-### Step 4: Configure Functions
-1. Go to Site settings → Functions
-2. Ensure the `api` directory is set as the functions directory
-3. The backend will be available at `/.netlify/functions/api/`
+2. **Import Repository**:
+   - Click "New Project"
+   - Import your GitHub repository
+   - Vercel will automatically detect the Next.js app
 
-**Result**: Your app will be available at `https://your-site.netlify.app`
+3. **Configure Environment Variables**:
+   - Go to Project Settings → Environment Variables
+   - Add your API keys:
+     - `POLYGON_API_KEY`: Your Polygon.io API key
+     - `FMP_API_KEY`: Your Financial Modeling Prep API key
 
-## Testing Your Deployment
+4. **Deploy**:
+   - Click "Deploy"
+   - Vercel will build and deploy your app
 
-### Health Check
-- Backend: `https://your-site.netlify.app/.netlify/functions/api/health`
-- Should return: `{"status": "healthy", "timestamp": "..."}`
+### Step 3: Verify Deployment
 
-### API Test
-- Test endpoint: `https://your-site.netlify.app/.netlify/functions/api/analyze/AAPL`
-- Should return stock analysis data
+1. **Check Build Logs**: Monitor the build process in Vercel dashboard
+2. **Test API Endpoints**: Visit `https://your-app.vercel.app/api/analyze/AAPL`
+3. **Test Frontend**: Visit your Vercel URL to see the VOLA Engine interface
 
-### Frontend Test
-- Visit your Netlify URL
-- Search for a stock (e.g., AAPL, TSLA)
-- Verify data loads correctly
+## Local Development
+
+### Backend (FastAPI)
+```bash
+cd vola-engine/api
+pip install -r requirements.txt
+uvicorn main:app --reload --host 127.0.0.1 --port 8000
+```
+
+### Frontend (Next.js)
+```bash
+cd vola-engine/app
+npm install
+npm run dev
+```
+
+## Environment Variables
+
+Set these in Vercel dashboard:
+
+- `POLYGON_API_KEY`: Your Polygon.io API key
+- `FMP_API_KEY`: Your Financial Modeling Prep API key
 
 ## Troubleshooting
 
 ### Common Issues
 
-1. **Build Failures**
-   - Check that all dependencies are in `requirements.txt`
-   - Verify Node.js version is 18+
-   - Ensure Python version is 3.11+
+1. **Python Dependencies**: Vercel automatically installs Python dependencies
+2. **API Key Issues**: Ensure environment variables are set correctly
+3. **Build Failures**: Check Vercel build logs for specific errors
 
-2. **API Keys Not Working**
-   - Verify API keys are correctly set in environment variables
-   - Check API key permissions and rate limits
-   - Test with a simple stock like AAPL
+### Support
 
-3. **Functions Not Working**
-   - Check that the `api` directory is properly configured
-   - Verify the function timeout settings
-   - Check the function logs in Netlify dashboard
+- **Vercel Documentation**: [vercel.com/docs](https://vercel.com/docs)
+- **Python on Vercel**: [vercel.com/docs/functions/serverless-functions/runtimes/python](https://vercel.com/docs/functions/serverless-functions/runtimes/python)
 
-4. **CORS Errors**
-   - The backend is configured to allow all origins
-   - Check that API URLs are correct
+## Features
 
-### Debug Commands
+- **Full-Stack Deployment**: Both frontend and backend on Vercel
+- **Automatic Scaling**: Vercel handles traffic spikes
+- **Global CDN**: Fast loading worldwide
+- **Serverless Functions**: Python backend runs as serverless functions
+- **Automatic HTTPS**: SSL certificates included
+- **Custom Domains**: Add your own domain
 
-```bash
-# Test locally
-cd api
-uvicorn main:app --reload --host 127.0.0.1 --port 8000
-
-cd app
-npm run dev
-
-# Check environment variables
-echo $POLYGON_API_KEY
-echo $FMP_API_KEY
-```
-
-## Performance Optimization
-
-### For Netlify Deployment
-- Functions have a 10-second timeout limit
-- Use caching for frequently requested data
-- Optimize API calls to reduce latency
-- Consider using Netlify's edge functions for better performance
-
-## Security Considerations
-
-1. **API Keys**: Never commit API keys to version control
-2. **Environment Variables**: Use Netlify's environment variable system
-3. **CORS**: Configured for production domains
-4. **Rate Limiting**: Implement rate limiting for API endpoints
-
-## Monitoring
-
-### Netlify Analytics
-- Page view analytics
-- Build and deployment monitoring
-- Function execution logs
-- Error tracking and alerting
-
-## Next Steps
-
-1. **Custom Domain**: Configure custom domain for production
-2. **SSL Certificate**: Ensure HTTPS is enabled
-3. **Monitoring**: Set up error tracking and analytics
-4. **Scaling**: Plan for increased traffic and usage
-
-## Project Structure
-
-```
-vola-engine/
-├── api/                 # FastAPI backend (Netlify Functions)
-│   ├── main.py         # Main application
-│   └── requirements.txt # Python dependencies
-├── app/                # Next.js frontend
-│   ├── src/
-│   │   └── app/        # App Router pages
-│   ├── package.json    # Node.js dependencies
-│   └── next.config.js  # Next.js configuration
-├── netlify.toml        # Netlify deployment config
-└── README.md
-```
-
-## Configuration Files
-
-### netlify.toml
-- Configures build settings
-- Sets up API redirects
-- Defines function directory
-
-### next.config.js
-- Static export configuration
-- Unoptimized images for static deployment
-
-### requirements.txt
-- Python dependencies optimized for Netlify
-- Lightweight packages for faster deployment
-
----
-
-**Need Help?** Check the troubleshooting section or create an issue in the repository. 
+Your VOLA Engine will be live at `https://your-app.vercel.app` after deployment. 
