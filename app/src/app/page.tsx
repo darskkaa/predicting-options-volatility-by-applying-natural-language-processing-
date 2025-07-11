@@ -365,7 +365,7 @@ export default function Home() {
                     <h4 className="text-2xl font-semibold mb-4">Risk Indicators</h4>
                     <div className="space-y-3">
                       {sentimentData.risk_indicators.map((indicator, index) => (
-                        <p key={index} className="text-red-400 text-lg">⚠️ {indicator}</p>
+                        <p key={index} className="text-red-400 text-lg">Warning: {indicator}</p>
                       ))}
                     </div>
                   </div>
