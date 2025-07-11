@@ -40,4 +40,4 @@ npm run dev
 
 ## Made by Adil
 
-This is my personal project for analyzing stock volatility. No AI, no fancy stuff - just straightforward financial analysis. 
+This is my personal project for analyzing stock volatility. Just straightforward financial analysis. 
