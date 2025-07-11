@@ -4,10 +4,9 @@
   publish = "app/out"
 
 [build.environment]
-  NETLIFY_USE_LEGACY_BUILD_IMAGE = "true"
   NODE_VERSION = "18"
-  PYTHON_VERSION = "3.11"
-  PYTHON_RUNTIME = "3.11"
+  PYTHON_VERSION = "3.10"
+  PYTHON_RUNTIME = "3.10"
 
 [[redirects]]
   from = "/api/*"
