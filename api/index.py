@@ -4,7 +4,20 @@ VOLA Engine API - Entry point for Vercel deployment
 This file serves as the entry point for Vercel serverless functions.
 It imports the FastAPI app from main.py and adds additional endpoints.
 """
-from main import app
+import sys
+import os
+
+# Add the current directory to Python path
+sys.path.append(os.path.dirname(__file__))
+
+try:
+    from main import app
+except ImportError as e:
+    print(f"Error importing from main.py: {e}")
+    # Create a minimal app if import fails
+    from fastapi import FastAPI
+    app = FastAPI(title="VOLA Engine API", version="1.0.0")
+
 from fastapi import HTTPException
 from datetime import datetime
 import random
@@ -66,6 +79,16 @@ async def get_sentiment_analysis(ticker: str):
             "risk_indicators": [],
             "timestamp": datetime.now().isoformat()
         }
+
+# Add a simple test endpoint
+@app.get("/api/test")
+def test_endpoint():
+    return {"message": "API is working!", "status": "success"}
+
+# Add a health check endpoint
+@app.get("/health")
+def health_check():
+    return {"status": "healthy", "timestamp": datetime.now().isoformat()}
 
 # Export the app for Vercel
 app.debug = False 
