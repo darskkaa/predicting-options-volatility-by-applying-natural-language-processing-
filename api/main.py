@@ -45,6 +45,10 @@ def read_root():
 def health_check():
     return {"status": "healthy", "timestamp": datetime.now().isoformat()}
 
+@app.get("/api/test")
+def test_endpoint():
+    return {"message": "API is working!", "status": "success"}
+
 def generate_analysis_summary(ticker: str, stock_data: dict, volatility_data: dict, earnings_data: dict) -> str:
     price = stock_data.get("price", 0)
     volatility = volatility_data.get("annualized_volatility", 0)
@@ -66,7 +70,7 @@ def generate_analysis_summary(ticker: str, stock_data: dict, volatility_data: di
         + (f" Next earnings are expected {next_earnings}." if next_earnings and next_earnings != 'N/A' else "")
     )
 
-@app.get("/analyze/{ticker}")
+@app.get("/api/analyze/{ticker}")
 async def analyze_stock(ticker: str):
     """Analyze any stock ticker with comprehensive data and improved error handling"""
     ticker = ticker.upper()
